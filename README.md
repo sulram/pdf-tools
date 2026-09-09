@@ -24,10 +24,13 @@ Check the result with `pdffonts out.pdf`: every row should show `emb yes`.
 
 ## Shell shortcut
 
-Clone the repo, make the script executable, then in `~/.zshrc`:
+In `~/.zshrc`, running straight from GitHub (no clone):
 
 ```sh
-fixpdf() { ~/path/to/cjk-pdf-embed.py "$1" "${1:r}_fixed.pdf" ~/Library/Fonts/NotoSerifSC-Bold.ttf }
+fixpdf() {
+  uv run --script https://raw.githubusercontent.com/sulram/cjk-pdf-embed/main/cjk-pdf-embed.py \
+    "$1" "${1:r}_fixed.pdf" ~/Library/Fonts/NotoSerifSC-Bold.ttf
+}
 ```
 
-`fixpdf form.pdf` writes `form_fixed.pdf` next to the original. First run takes a few seconds while uv installs PyMuPDF; after that it is instant.
+`fixpdf form.pdf` writes `form_fixed.pdf` next to the original. First run takes a few seconds while uv installs PyMuPDF; after that only the small script download repeats. Replace `main` with a tag or commit hash to pin a version.
